@@ -19,7 +19,7 @@ public class HomeController {
 	public String home(Model model) {
 		List<Excursion> lista = edao.findAll();
 		
-		model.addAttribute("excursion", edao.findAll());
+		model.addAttribute("excursion", lista);
 		
 		return "home";
 	}

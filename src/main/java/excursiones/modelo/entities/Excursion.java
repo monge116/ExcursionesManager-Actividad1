@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,14 +29,17 @@ public class Excursion implements Serializable{
 	private String descripcion;
 	private String origen;
 	private String destino;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="fecha_excursion")
+	@Temporal(TemporalType.DATE)
 	private Date fechaExcursion;
 	private int duracion;
 	private String estado;
 	private String destacado;
 	private int aforoMaximo;
-	private int precioUnitario;
+	private double precioUnitario;
 	private String imagen;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="fecha_alta")
 	@Temporal(TemporalType.DATE)
 	private Date fechaAlta;
@@ -139,7 +144,7 @@ public class Excursion implements Serializable{
 		this.aforoMaximo = aforoMaximo;
 	}
 
-	public int getPrecioUnitario() {
+	public double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
