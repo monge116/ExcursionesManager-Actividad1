@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/ele/editar/{idProducto}(idProducto=${producto.idProducto})}" method="post" th:object="${producto}">
+		
+		<p>
+			<input type="text" th:field="*{descripcion}">
+		</p>
+		<p>
+			<input type="text" th:field="*{precio}">
+		</p>
+		<p>
+			<input type="text" th:field="*{stock}">
+		</p>
+		<p>
+			<input type="date" th:field="*{fechaAlta}">
+		</p>
+		
+		<p>
+			<input type="submit" value="Enviar">
+		</p>
+		
+	
+	<a th:href="@{/}">Home</a>	
+	
+	
+	</form>
+</body>
+</html>

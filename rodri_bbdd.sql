@@ -10,7 +10,7 @@ CREATE TABLE excursiones (
     estado varchar(20),
     check(estado in('cancelado', 'terminado', 'creado')),
     destacado varchar(1),
-    check (destacado in("S", "N")),
+    check (destacado in('S', 'N')),
     aforoMaximo int,
     minimoAsistentes int,
     precioUnitario double,

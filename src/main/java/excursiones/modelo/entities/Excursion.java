@@ -37,6 +37,8 @@ public class Excursion implements Serializable{
 	private String estado;
 	private String destacado;
 	private int aforoMaximo;
+	@Column(name="minimoAsistentes")
+	private int minimoAsistencia;
 	private double precioUnitario;
 	private String imagen;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -55,8 +57,8 @@ public class Excursion implements Serializable{
 	}
 
 	public Excursion(long idExcursion, String descripcion, String origen, String destino, Date fechaExcursion,
-			int duracion, String estado, String destacado, int aforoMaximo, int precioUnitario, String imagen,
-			Date fechaAlta) {
+			int duracion, String estado, String destacado, int aforoMaximo, int minimoAsistencia, double precioUnitario,
+			String imagen, Date fechaAlta) {
 		super();
 		this.idExcursion = idExcursion;
 		this.descripcion = descripcion;
@@ -67,6 +69,7 @@ public class Excursion implements Serializable{
 		this.estado = estado;
 		this.destacado = destacado;
 		this.aforoMaximo = aforoMaximo;
+		this.minimoAsistencia = minimoAsistencia;
 		this.precioUnitario = precioUnitario;
 		this.imagen = imagen;
 		this.fechaAlta = fechaAlta;
@@ -144,11 +147,19 @@ public class Excursion implements Serializable{
 		this.aforoMaximo = aforoMaximo;
 	}
 
+	public int getMinimoAsistencia() {
+		return minimoAsistencia;
+	}
+
+	public void setMinimoAsistencia(int minimoAsistencia) {
+		this.minimoAsistencia = minimoAsistencia;
+	}
+
 	public double getPrecioUnitario() {
 		return precioUnitario;
 	}
 
-	public void setPrecioUnitario(int precioUnitario) {
+	public void setPrecioUnitario(double precioUnitario) {
 		this.precioUnitario = precioUnitario;
 	}
 
@@ -191,9 +202,11 @@ public class Excursion implements Serializable{
 	public String toString() {
 		return "Excursion [idExcursion=" + idExcursion + ", descripcion=" + descripcion + ", origen=" + origen
 				+ ", destino=" + destino + ", fechaExcursion=" + fechaExcursion + ", duracion=" + duracion + ", estado="
-				+ estado + ", destacado=" + destacado + ", aforoMaximo=" + aforoMaximo + ", precioUnitario="
-				+ precioUnitario + ", imagen=" + imagen + ", fechaAlta=" + fechaAlta + "]";
+				+ estado + ", destacado=" + destacado + ", aforoMaximo=" + aforoMaximo + ", minimoAsistencia="
+				+ minimoAsistencia + ", precioUnitario=" + precioUnitario + ", imagen=" + imagen + ", fechaAlta="
+				+ fechaAlta + "]";
 	}
+
 	
 	
 	

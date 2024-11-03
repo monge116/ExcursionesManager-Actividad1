@@ -22,10 +22,10 @@
     <section class="d-flex justify-content-center align-center">
     	<div class="form-container w-50 shadow p-3 bg-white rounded ">
         <h2 class="text-center">Registrar Excursión</h2>
-        <form>
+        <form th:action="@{/excursiones/alta}" method="post">
             <!-- Descripción -->
             <div data-mdb-input-init class="form-outline mb-4">
-                <textarea class="form-control" id="descripcion" rows="3" required></textarea>
+                <textarea name="descripcion" class="form-control" id="descripcion" rows="3" required></textarea>
                 <label class="form-label" for="descripcion">Descripción</label>
             </div>
 
@@ -33,13 +33,13 @@
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="text" id="origen" class="form-control" required />
+                        <input name="origen" type="text" id="origen" class="form-control" required />
                         <label class="form-label" for="origen">Origen</label>
                     </div>
                 </div>
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="text" id="destino" class="form-control" required />
+                        <input name="destino" type="text" id="destino" class="form-control" required />
                         <label class="form-label" for="destino">Destino</label>
                     </div>
                 </div>
@@ -49,13 +49,13 @@
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="date" id="fecha_excursion" class="form-control" required />
+                        <input name="fechaExcursion" type="date" id="fecha_excursion" class="form-control" required />
                         <label class="form-label" for="fecha_excursion">Fecha de Excursión</label>
                     </div>
                 </div>
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="number" id="duracion" class="form-control" min="1" required />
+                        <input name="duracion" type="number" id="duracion" class="form-control" min="1" required />
                         <label class="form-label" for="duracion">Duración (días)</label>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <select class="form-control" id="estado" required>
+                        <select name="estado" class="form-control" id="estado" required>
                             <option value="">Seleccione...</option>
                             <option value="cancelado">Cancelado</option>
                             <option value="terminado">Terminado</option>
@@ -74,20 +74,33 @@
                         <label class="form-label" for="estado">Estado</label>
                     </div>
                 </div>
-                 
+				
+				                
+							<div class="col">
+							        <div data-mdb-input-init class="form-outline">
+							            <select name="destacado" class="form-control" id="destacado" required>
+							                <option value="">Seleccione...</option>
+							                <option value="S">Sí</option>
+							                <option value="N">No</option>
+							            </select>
+							            <label class="form-label" for="destacado">Destacado</label>
+							        </div>
+							    </div>
+				               	
+				       
             </div>
 
             <!-- Aforo Máximo y Mínimo Asistentes -->
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="number" id="aforoMaximo" class="form-control" min="1" required />
+                        <input name="aforoMaximo"  type="number" id="aforoMaximo" class="form-control" min="1" required />
                         <label class="form-label" for="aforoMaximo">Aforo Máximo</label>
                     </div>
                 </div>
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="number" id="minimoAsistentes" class="form-control" min="1" required />
+                        <input name="minimoAsistencia" type="number" id="minimoAsistentes" class="form-control" min="1" required />
                         <label class="form-label" for="minimoAsistentes">Mínimo Asistentes</label>
                     </div>
                 </div>
@@ -97,23 +110,18 @@
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="number" id="precioUnitario" class="form-control" step="0.01" required />
+                        <input name="precioUnitario" type="number" id="precioUnitario" class="form-control" step="0.01" required />
                         <label class="form-label" for="precioUnitario">Precio Unitario (€)</label>
                     </div>
                 </div>
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <input type="text" id="imagen" class="form-control" required />
+                        <input name="imagen" type="text" id="imagen" class="form-control" required />
                         <label class="form-label" for="imagen">Imagen (URL)</label>
                     </div>
                 </div>
             </div>
-            <div class="form-check mb-4 ">
-                 
-                	<input class="form-check-input" type="checkbox" id="destacado" checked />
-                	<label class="form-check-label" for="destacado">Destacar</label>
-                	
-            </div>
+           
 
 
 
