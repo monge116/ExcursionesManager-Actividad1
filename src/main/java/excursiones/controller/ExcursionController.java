@@ -2,6 +2,7 @@ package excursiones.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import excursiones.modelo.dao.ExcursionDao;
@@ -29,7 +31,7 @@ public class ExcursionController {
 	public String procFormEditar(Excursion excursion, @PathVariable long idExcursion, RedirectAttributes ratt) {
 		excursion.setIdExcursion(idExcursion);
 		if(edao.updateOne(excursion)==1)
-			ratt.addFlashAttribute("mensaje", "excursion editada");
+			ratt.addFlashAttribute("mensaje", "Excursion editada");
 		else
 			ratt.addFlashAttribute("mensaje", "excursion no editado");
 		return "redirect:/";
@@ -47,6 +49,47 @@ public class ExcursionController {
 		model.addAttribute("excursion", excursion);
 		
 		return "formEditarExcursion";
+	}
+	
+	@GetMapping("/destacados")
+	public String destacados(Model model) {
+		List<Excursion> lista = edao.findByDestacados();
+		model.addAttribute("mensaje", "Destacados");
+		model.addAttribute("excursion", lista);
+		
+		return "home";
+	}
+	@GetMapping("/creados")
+	public String creados(Model model) {
+		List<Excursion> lista = edao.findByCreados();
+		model.addAttribute("mensaje", "Creados");
+		model.addAttribute("excursion", lista);
+		
+		return "home";
+	}
+	@GetMapping("/terminados")
+	public String terminados(Model model) {
+		List<Excursion> lista = edao.findByTerminado();
+		model.addAttribute("mensaje", "Terminados");
+		model.addAttribute("excursion", lista);
+		
+		return "home";
+	}
+	@GetMapping("/cancelados")
+	public String cancelados (Model model) {
+		List<Excursion> lista = edao.findByCancelados();
+		model.addAttribute("mensaje", "Cancelados");
+		model.addAttribute("excursion", lista);
+		
+		return "home";
+	}
+	
+	@PostMapping("/porOrigen")
+	public String origen(Model model, @RequestParam String origen) {
+	    List<Excursion> lista = edao.origenContiene(origen);
+	    model.addAttribute("mensaje", "Filtrar por " + origen);
+	    model.addAttribute("excursion", lista);
+	    return "home"; // Redirect or forward to the appropriate view
 	}
 	
 	@GetMapping("/alta")
@@ -104,7 +147,7 @@ public class ExcursionController {
 			model.addAttribute("mensaje", "No existe excursion");
 			return "forward:/";
 		}
-		return "verDetalle";
+		return "VerDetalle";
 	}
 }
 	

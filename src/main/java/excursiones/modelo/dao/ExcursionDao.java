@@ -12,5 +12,6 @@ public interface ExcursionDao {
 	List<Excursion> findByCreados();
 	List<Excursion> findByCancelados();
 	List<Excursion> findByTerminado();
-	List<Excursion> findByDestados();
+	List<Excursion> findByDestacados();
+	List<Excursion> origenContiene(String cadena);
 }

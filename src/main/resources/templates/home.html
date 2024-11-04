@@ -16,18 +16,72 @@
 
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="#" class="nav-link text-secondary" aria-current="page" th:href="@{/}">Home</a></li>
+        <li class="nav-item"></li>
         <li class="nav-item"><a th:href="@{/excursiones/alta}" class="nav-link text-white" >Añadir producto</a></li>
       </ul>
+      
     </header>
  
   
+		
+	
 
-<span th:text="${mensaje}"></span>
 
 
-
-<div class="d-flex justify-content-center align-center">
-	<TABLE class="table table-dark table-hover table-striped grid text-center w-50 " >
+<div class="d-flex justify-content-center align-center w">
+	
+	
+	
+	
+	<div class="w-50">
+				<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Filtros
+    </a>
+    <a href="#"  aria-current="page" th:href="@{/}"><span class="m-2" th:text="${mensaje}"></span></a>
+    
+</p>
+<div class="collapse " id="collapseExample">
+    <div class="m-2 card card-body">
+        <div class="row g-3">
+            <div class="col-auto">
+            	<form th:action="@{/excursiones/porOrigen}" method="post">
+    				<input name="origen" class="form-control" placeholder="Buscar por origen" type="text" required>
+   	 				<button class="btn btn-primary " type="submit">Buscar</button>
+				</form>
+            </div>
+            <div class="col-auto">
+                <input class="form-control" placeholder="Buscar por destino" type="text">
+            </div>
+            <div class="col-auto">
+                <input class="form-control" placeholder="Precio mínimo" type="number" min="0" step="0.01">
+            </div>
+            <div class="col-auto">
+                <input class="form-control" placeholder="Precio máximo" type="number" min="0" step="0.01">
+            </div>
+            
+            
+            
+            
+   			<div class="col-auto">
+                <button class="btn btn-warning" type="submit"><a th:href="@{/excursiones/creados}" class="nav-link " >Creados</a></button>
+            </div>
+			<div class="col-auto">
+                <button class="btn btn-success" type="submit"><a th:href="@{/excursiones/terminados}" class="nav-link " >Terminados</a></button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-danger" type="submit"><a th:href="@{/excursiones/cancelados}" class="nav-link " >Cancelados</a></button>
+            </div>
+             <div class="col-auto">
+                <button class="btn btn-secondary" type="submit"><a th:href="@{/excursiones/destacados}" class="nav-link " >Destacados</a></button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+			
+		<TABLE class="table table-dark  table-striped grid text-center " >
+		
 	<thead class="thead-dark">
 		<TR>
 			<TH>Origen</TH> 
@@ -46,7 +100,8 @@
 	<tbody>
 		<TR th:each="ele:${excursion}"
 		 	th:class="${ele.estado == 'cancelado' ? 'table-danger' : (ele.estado == 'terminado' ? 'table-success' : (ele.estado == 'creado' ? 'table-warning' : ''))}"
-                                >
+             >
+                                
 			<TD th:text="${ele.origen}"></TD>				
 			<TD th:text="${ele.destino}"></TD> 
 			<TD th:text="${ele.fechaExcursion}"></TD> 
@@ -79,10 +134,13 @@
 	</tbody>
 
 </TABLE>
+	</div>
+	
 </div>
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 
 </html>

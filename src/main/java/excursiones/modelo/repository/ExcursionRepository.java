@@ -10,4 +10,6 @@ public interface ExcursionRepository extends JpaRepository<Excursion, Long> {
 
 	List<Excursion> findByEstado(String estado);
 	List<Excursion> findByDestacado(String destacado);
+	
+	List<Excursion> findByOrigenContaining(String cadena);
 }

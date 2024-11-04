@@ -61,9 +61,18 @@ public class ExcursionDaoImplJpaMy8 implements ExcursionDao{
 	}
 
 	@Override
-	public List<Excursion> findByDestados() {
+	public List<Excursion> findByDestacados() {
 		String destacado= "S";
 		return erepo.findByDestacado(destacado);
+	}
+
+
+
+
+	@Override
+	public List<Excursion> origenContiene(String cadena) {
+		
+		return erepo.findByOrigenContaining(cadena);
 	}
 
 	
