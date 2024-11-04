@@ -44,9 +44,9 @@ public class ExcursionController {
 			model.addAttribute("mensaje", "Excursion no existe");
 			return "forward:/";
 		}
-		model.addAttribute("Excursion", excursion);
+		model.addAttribute("excursion", excursion);
 		
-		return "FormEditarExcursion";
+		return "formEditarExcursion";
 	}
 	
 	@GetMapping("/alta")
@@ -81,9 +81,10 @@ public class ExcursionController {
 		}
 		
 		
-		model.addAttribute("Excursion", excursion);
+		model.addAttribute("excursion", excursion);
 	
 		return "forward:/";
+	}
 		
 		/*if(edao.(idExcursion)==1) {
 			model.addAttribute("mensaje", "Producto eliminado");
@@ -92,23 +93,23 @@ public class ExcursionController {
 		}
 		*/
 		
-	}
-}
+
 	
-	/*@GetMapping("/detalle/{idProducto}")
-	public String verDetalle(@PathVariable long idProducto, Model model) {
-		Producto producto = pdao.findById(idProducto);
-		if(producto != null) {
-			model.addAttribute("producto", producto);
+	@GetMapping("/detalle/{idExcursion}")
+	public String verDetalle(@PathVariable long idExcursion, Model model) {
+		Excursion excursion = edao.findById(idExcursion);
+		if(excursion != null) {
+			model.addAttribute("excursion", excursion);
 		}else {
-			model.addAttribute("mensaje", "No existe producto");
+			model.addAttribute("mensaje", "No existe excursion");
 			return "forward:/";
 		}
 		return "verDetalle";
 	}
+}
 	
 	
-	
+	/*
 	@PostMapping("/alta/")
 	public String postMethodName(@RequestBody String entity) {
 		//TODO: process POST request
