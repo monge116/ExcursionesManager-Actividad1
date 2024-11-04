@@ -15,7 +15,7 @@ CREATE TABLE excursiones (
     minimoAsistentes int,
     precioUnitario double,
     imagen varchar(255),
-    fecha_alta timestamp,
+    fecha_alta Date,
     PRIMARY KEY (id)
 )
 ;
