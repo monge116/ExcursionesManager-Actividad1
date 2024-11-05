@@ -12,4 +12,5 @@ public interface ExcursionRepository extends JpaRepository<Excursion, Long> {
 	List<Excursion> findByDestacado(String destacado);
 	
 	List<Excursion> findByOrigenContaining(String cadena);
+	List<Excursion> findByPrecioUnitarioBetween(double precioMinimo, double precioMaximo);
 }

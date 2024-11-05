@@ -92,6 +92,24 @@ public class ExcursionController {
 	    return "home"; // Redirect or forward to the appropriate view
 	}
 	
+	@PostMapping("/porPrecio")
+	public String porPrecio(Model model, @RequestParam(required = false) Double precioMinimo, 
+            @RequestParam(required = false) Double precioMaximo) {
+	    
+	    
+	 // Si no se proporcionan valores, se asignan valores predeterminados
+	    if (precioMinimo == null) {
+	        precioMinimo = 0.0; // Si no se proporciona, por defecto 0
+	    }
+	    if (precioMaximo == null) {
+	        precioMaximo = 9999999.0; // Si no se proporciona, por defecto un valor muy alto (infinito)
+	    }
+	    List<Excursion> lista = edao.findByPrecioBetween(precioMinimo, precioMaximo);
+	    model.addAttribute("mensaje", "Filtrar por precio entre " + precioMinimo + "€ y " + precioMaximo + "€");
+	    model.addAttribute("excursion", lista);
+	    return "home"; // Devuelve la vista con los resultados filtrados
+	}
+	
 	@GetMapping("/alta")
 	public String alta() {
 		return "formAltaExcursion";

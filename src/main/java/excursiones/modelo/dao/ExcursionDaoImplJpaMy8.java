@@ -67,12 +67,19 @@ public class ExcursionDaoImplJpaMy8 implements ExcursionDao{
 	}
 
 
-
+	
 
 	@Override
 	public List<Excursion> origenContiene(String cadena) {
 		
 		return erepo.findByOrigenContaining(cadena);
+	}
+
+
+	@Override
+	public List<Excursion> findByPrecioBetween(double precioMinimo, double precioMaximo) {
+		
+		return erepo.findByPrecioUnitarioBetween(precioMinimo, precioMaximo);
 	}
 
 	

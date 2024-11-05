@@ -14,4 +14,5 @@ public interface ExcursionDao {
 	List<Excursion> findByTerminado();
 	List<Excursion> findByDestacados();
 	List<Excursion> origenContiene(String cadena);
+	List<Excursion> findByPrecioBetween(double precioMinimo, double precioMaximo);
 }
