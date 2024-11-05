@@ -27,6 +27,15 @@ public class ExcursionController {
 	@Autowired
 	private ExcursionDao edao;
 	
+	
+	/**
+     * Actualiza una excursión existente con los detalles proporcionados.
+     * @param excursion los detalles de la excursión a actualizar
+     * @param idExcursion el ID de la excursión a editar
+     * @param ratt RedirectAttributes para agregar mensajes al modelo
+     * @return redirige a la página de inicio
+     */
+	
 	@PostMapping("/editar/{idExcursion}")
 	public String procFormEditar(Excursion excursion, @PathVariable long idExcursion, RedirectAttributes ratt) {
 		excursion.setIdExcursion(idExcursion);
@@ -38,6 +47,12 @@ public class ExcursionController {
 	}
 	
 	
+	/**
+     * Muestra el formulario de edición para una excursión.
+     * @param model Objeto Model para agregar atributos
+     * @param idExcursion el ID de la excursión a recuperar y mostrar
+     * @return el nombre de la vista para editar excursiones
+     */
 	
 	@GetMapping("/editar/{idExcursion}")
 	public String mostrarFormEditar(Model model,  @PathVariable long idExcursion) {
@@ -51,6 +66,12 @@ public class ExcursionController {
 		return "formEditarExcursion";
 	}
 	
+	/**
+     * Muestra una lista de excursiones destacadas.
+     * @param model Objeto Model para agregar atributos
+     * @return la vista de la página de inicio con una lista de excursiones destacadas
+     */
+	
 	@GetMapping("/destacados")
 	public String destacados(Model model) {
 		List<Excursion> lista = edao.findByDestacados();
@@ -59,6 +80,13 @@ public class ExcursionController {
 		
 		return "home";
 	}
+	
+	/**
+     * Muestra una lista de excursiones creadas.
+     * @param model Objeto Model para agregar atributos
+     * @return la vista de la página de inicio con una lista de excursiones creadas
+     */
+	
 	@GetMapping("/creados")
 	public String creados(Model model) {
 		List<Excursion> lista = edao.findByCreados();
@@ -67,6 +95,13 @@ public class ExcursionController {
 		
 		return "home";
 	}
+	
+	/**
+     * Muestra una lista de excursiones terminadas.
+     * @param model Objeto Model para agregar atributos
+     * @return la vista de la página de inicio con una lista de excursiones terminadas
+     */
+	
 	@GetMapping("/terminados")
 	public String terminados(Model model) {
 		List<Excursion> lista = edao.findByTerminado();
@@ -75,6 +110,13 @@ public class ExcursionController {
 		
 		return "home";
 	}
+	
+	/**
+     * Muestra una lista de excursiones canceladas.
+     * @param model Objeto Model para agregar atributos
+     * @return la vista de la página de inicio con una lista de excursiones canceladas
+     */
+	
 	@GetMapping("/cancelados")
 	public String cancelados (Model model) {
 		List<Excursion> lista = edao.findByCancelados();
@@ -84,6 +126,14 @@ public class ExcursionController {
 		return "home";
 	}
 	
+	
+	/**
+     * Filtra excursiones por el lugar de origen.
+     * @param model Objeto Model para agregar atributos
+     * @param origen el origen por el cual se filtran las excursiones
+     * @return la vista de la página de inicio con los resultados filtrados
+     */
+	
 	@PostMapping("/porOrigen")
 	public String origen(Model model, @RequestParam String origen) {
 	    List<Excursion> lista = edao.origenContiene(origen);
@@ -91,6 +141,14 @@ public class ExcursionController {
 	    model.addAttribute("excursion", lista);
 	    return "home"; // Redirect or forward to the appropriate view
 	}
+	
+	/**
+     * Filtra excursiones por un rango de precio.
+     * @param model Objeto Model para agregar atributos
+     * @param precioMinimo el precio mínimo del rango de filtro
+     * @param precioMaximo el precio máximo del rango de filtro
+     * @return la vista de la página de inicio con los resultados filtrados por precio
+     */
 	
 	@PostMapping("/porPrecio")
 	public String porPrecio(Model model, @RequestParam(required = false) Double precioMinimo, 
@@ -110,11 +168,22 @@ public class ExcursionController {
 	    return "home"; // Devuelve la vista con los resultados filtrados
 	}
 	
+	/**
+     * Muestra el formulario de alta de una nueva excursión.
+     * @return el nombre de la vista para dar de alta una excursión
+     */
+	
 	@GetMapping("/alta")
 	public String alta() {
 		return "formAltaExcursion";
 	}
 	
+	/**
+     * Procesa el formulario de alta de una nueva excursión.
+     * @param excursion los detalles de la nueva excursión
+     * @param ratt RedirectAttributes para agregar mensajes al modelo
+     * @return redirige a la página de inicio
+     */
 	
 	@PostMapping("/alta")
 	public String procAlta(Excursion excursion, RedirectAttributes ratt) {
@@ -128,6 +197,12 @@ public class ExcursionController {
 		return "redirect:/";
 	}
 	
+	/**
+     * Cambia el estado de una excursión a "cancelado".
+     * @param idExcursion el ID de la excursión a cancelar
+     * @param model Objeto Model para agregar atributos
+     * @return redirige a la página de inicio
+     */
 	
 	@GetMapping("/cancelar/{idExcursion}")
 	public String eliminar(@PathVariable long idExcursion, Model model) {
@@ -146,15 +221,42 @@ public class ExcursionController {
 	
 		return "forward:/";
 	}
-		
-		/*if(edao.(idExcursion)==1) {
-			model.addAttribute("mensaje", "Producto eliminado");
-		}else {
-			model.addAttribute("mensaje", "Producto no eliminado");
-		}
-		*/
+	
+	/**
+	 * Cambia el estado de destacado de una excursión.
+	 * 
+	 * @param idExcursion El identificador de la excursión.
+	 * @param model El modelo para pasar atributos a la vista.
+	 * @return Redirige a la página de inicio.
+	 */
+	@GetMapping("/destacar/{idExcursion}")
+	public String destacar(@PathVariable long idExcursion, Model model) {
+	    Excursion excursion = edao.findById(idExcursion);
+	    
+	    if (excursion != null) {
+	       
+	        if ("S".equals(excursion.getDestacado())) {
+	            excursion.setDestacado("N"); 
+	        } else {
+	            excursion.setDestacado("S");
+	        }
+	
+	        edao.updateOne(excursion);
+	        model.addAttribute("excursion", excursion);
+	    } else {
+	        model.addAttribute("mensaje", "Excursión no encontrada");
+	    }
+
+	    return "forward:/";
+	}
 		
 
+	/**
+     * Muestra los detalles de una excursión específica.
+     * @param idExcursion el ID de la excursión a mostrar
+     * @param model Objeto Model para agregar atributos
+     * @return la vista de detalle de la excursión
+     */
 	
 	@GetMapping("/detalle/{idExcursion}")
 	public String verDetalle(@PathVariable long idExcursion, Model model) {
